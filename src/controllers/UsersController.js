@@ -41,15 +41,15 @@ class UsersController {
       user.name = name;
     }
 
-    const userWithEmail = await database.get(
-      "SELECT * FROM users WHERE email = (?)",
-      [email]
-    );
-    if (userWithEmail && userWithEmail.id !== user.id) {
-      throw new AppError("Esse email já está em uso!");
-    }
-
     if (email) {
+      const userWithEmail = await database.get(
+        "SELECT * FROM users WHERE email = (?)",
+        [email]
+      );
+      if (userWithEmail && userWithEmail.id !== user.id) {
+        throw new AppError("Esse email já está em uso!");
+      }
+
       user.email = email;
     }
 
