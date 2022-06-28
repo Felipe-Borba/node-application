@@ -72,11 +72,11 @@ class UsersController {
       UPDATE users SET
       name = (?),
       email = (?),
-      updated_at = (?),
+      updated_at = DATETIME('now'),
       password = (?)
       WHERE id = (?)
       `,
-      [user.name, user.email, new Date(), user.password, id]
+      [user.name, user.email, user.password, id]
     );
 
     return response.json();
