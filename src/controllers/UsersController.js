@@ -53,18 +53,17 @@ class UsersController {
       user.email = email;
     }
 
-    if (password && !old_password) {
-      throw new AppError("A senha antiga é obrigatória!");
-    }
+    if (password) {
+      if (!old_password) {
+        throw new AppError("A senha antiga é obrigatória!");
+      }
 
-    if (password && old_password) {
       const checkedOldPassword = await compare(old_password, user.password);
-
       if (!checkedOldPassword) {
         throw new AppError("A senha antiga não confere!");
-      } else {
-        user.password = await hash(password, 8);
       }
+
+      user.password = await hash(password, 8);
     }
 
     await database.run(
