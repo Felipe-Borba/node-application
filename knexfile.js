@@ -10,5 +10,8 @@ module.exports = {
       filename: path.resolve(__dirname, "src", "database", "database.db"), //TODO I think its just fine if remove __dirname
     },
     useNullAsDefault: true,
+    migrations: {
+      directory: path.resolve(__dirname, "src", "database", "knex", "migrations"),
+    },
   },
 };
