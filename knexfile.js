@@ -9,6 +9,9 @@ module.exports = {
     connection: {
       filename: path.resolve(__dirname, "src", "database", "database.db"), //TODO I think its just fine if remove __dirname
     },
+    pool: {
+      afterCreate: (connection, callback) => connection.run("PRAGMA foreign_keys = ON", callback)
+    },
     useNullAsDefault: true,
     migrations: {
       directory: path.resolve(__dirname, "src", "database", "knex", "migrations"),
